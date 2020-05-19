@@ -1,0 +1,33 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: data-post-pod
+  namespace: elk-perf
+spec:
+  template:
+    spec:
+      containers:
+      - name: data-post-pod-container
+        image: "us.icr.io/aiopsk8s/data-post"
+        ports:
+        - containerPort: 9095
+          protocol: TCP
+        tty: true
+        env:
+        - name: secureHead
+          value: "true"
+        - name: eUser
+          value: "mcmpadmin"
+        - name: ePassword
+          value: "mcmp@Passwd"
+        - name: elasticClusterIP
+          value: "cloud-release-ibm-cloud-brokerage-elk-elasticsearch"
+        - name: dataSize
+          value: "10000"
+        - name: GOGC
+          value: "100"
+      imagePullSecrets:
+        - name: elk-perf-us-icr-io
+      restartPolicy: Never
+  backoffLimit: 4
