@@ -25,9 +25,15 @@ import (
 func main() {
 	///////str[output.csv-name]=[]string{original-name,type}
 	h, _ := os.Getwd()
-	currentPath := filepath.Join(h, "testmapping")
+	//currentPath := filepath.Join(h, "testmapping")
 
-	csvFile, err := os.Open(filepath.Join(currentPath, "output (29).csv"))
+	fmt.Println("Execution start")
+	fmt.Println("Time to wait")
+	time.Sleep(5 * time.Minute)
+	fmt.Println("waiting is over")
+	fmt.Println("current path is:", h)
+
+	csvFile, err := os.Open(filepath.Join("/tmp/src/testmapping", "output (29).csv"))
 	if err != nil {
 		panic(err)
 	}
